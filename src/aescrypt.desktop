@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=AES Crypt
+Comment=Encrypt or Decrypt a file using AES Crypt
+Icon=/usr/share/icons/hicolor/scalable/apps/aescrypt.svg
+Exec=/usr/bin/aescrypt-gui %F
+Terminal=false
+MimeType=all/allfiles;application/aescrypt
+Categories=Utility;Security;FileTools

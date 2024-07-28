@@ -1,0 +1,196 @@
+#!/usr/bin/perl
+#
+# aescrypt-gui
+# Copyright (C) 2024
+# Terrapane Corporation
+#
+# This script launches the AES Crypt binary to encrypt files when directed
+# by the user from the Linux desktop.
+#
+# usage: aescrypt-gui [FILES]...
+#
+
+use strict;
+
+# Check to see if the specified application is available
+sub IsAvailable($)
+{
+    my ($application) = @_;
+
+    # If the string is empty, indicate it's not available
+    if (length($application) == 0)
+    {
+        return 0;
+    }
+
+    return (system("which $application >/dev/null 2>&1") == 0);
+}
+
+# This function will perform the requested operation, returning the result
+# and the outout from stderr
+sub PerformAction(@)
+{
+    my ($capture_stderr, @parameters) = @_;
+    my $output;
+
+    # Escape each of the parameters
+    for (my $i = 0; $i <= $#parameters; $i++)
+    {
+        # Copy the parameter
+        my $parameter = $parameters[$i];
+
+        # Escape single quote characters
+        $parameter =~ s/'/'\\\''/g;
+
+        # Put single quotes around the parameter
+        $parameter = "'$parameter'";
+
+        # Put the parameter back in the array
+        $parameters[$i] = $parameter;
+    }
+
+    if ($capture_stderr)
+    {
+        $output = qx(@parameters 2>&1);
+    }
+    else
+    {
+        $output = qx(@parameters);
+    }
+    chomp($output);
+    my $result = $?;
+
+    return ($result, $output);
+}
+
+# Try to determine the type of desktop
+my $desktop = $ENV{"XDG_CURRENT_DESKTOP"};
+
+# If desktop is KDE, prefer kdialog; else prefer zenity
+my $dialog = ($desktop eq "KDE") ? "kdialog" : "zenity";
+my $alternate_dialog = ($desktop eq "KDE") ? "zenity" : "kdialog";
+
+# If the preferred dialog is not available, check the alternate
+if (!IsAvailable($dialog))
+{
+    # Attempt to use the alternative dialog application
+    $dialog = $alternate_dialog;
+
+    # If the alternate is not available, report an error and exit
+    if (!IsAvailable($dialog))
+    {
+        print STDERR "Neither zenity nor kdialog is installed\n";
+        exit(-1);
+    }
+}
+
+# Set the dialog parameters
+my @password_prompt;
+my @password_prompt_verify;
+my @error_message;
+my @info_message;
+if ($dialog eq "kdialog")
+{
+    @password_prompt = ("kdialog", "--title", "AES Crypt", "--password", "Enter password");
+    @password_prompt_verify = ("kdialog", "--title", "AES Crypt (Verify)", "--password", "Enter password");
+    @error_message = ("kdialog", "--title", "AES Crypt", "--error");
+    @info_message = ("kdialog", "--title", "AES Crypt", "--msgbox");
+}
+else
+{
+    @password_prompt = ("zenity", "--title", "AES Crypt", "--password");
+    @password_prompt_verify = ("zenity", "--title", "AES Crypt (Verify)", "--password");
+    @error_message = ("zenity", "--title", "AES Crypt", "--width", "350", "--error", "--text");
+    @info_message = ("zenity", "--title", "AES Crypt", "--width", "350", "--info", "--text");
+}
+
+# If no arguments were given, present an error dialog and exit
+if ($#ARGV == -1)
+{
+    PerformAction(0, @error_message, "No input files were given");
+    exit(-1);
+}
+
+# It is asssumed that all files will be encrypted or decrypted, with the
+# choice based on the first file seen; assume encryption initially
+my $mode = "e";
+if ($ARGV[0] =~ /\.aes$/i)
+{
+    # It appears the file ends in .aes, so mode is decryption
+    $mode = "d";
+}
+
+# If decrypting, ensure all files end in .aes
+if ($mode eq "d")
+{
+    foreach my $file (@ARGV)
+    {
+        if (!($file =~ /\.aes$/i))
+        {
+            PerformAction(0, @error_message, "At least one of the input files does not end with .aes");
+            exit(-1);
+        }
+    }
+}
+
+# Define the variable to store the password
+my $password = "";
+
+# Loop until user cancels the prompt or provides a password
+while (1)
+{
+    # Prompt the user for a password
+    (my $pw_result, $password) = PerformAction(0, @password_prompt);
+    if ($pw_result)
+    {
+        # User hit cancel, so exit
+        exit(0);
+    }
+
+    # If the password is empty, do not proceed
+    last if (length($password) > 0);
+
+    # Notify the user that the password is empty
+    PerformAction(0, @error_message, "Password is empty");
+}
+
+# If encrypting, prompt again
+if ($mode eq "e")
+{
+    # Prompt for the password again
+    my ($verify_result, $password_verify) = PerformAction(0, @password_prompt_verify);
+    if ($verify_result)
+    {
+        # User hit cancel
+        exit(0);
+    }
+
+    # Ensure they are equal
+    if ($password ne $password_verify)
+    {
+        PerformAction(0, @error_message, "Passwords do not match");
+        exit(-1);
+    }
+}
+
+# Iterate over each file to perform encryption
+foreach my $file (@ARGV)
+{
+    # Encrypt or decrypt the file
+    my ($aes_result, $output) = PerformAction(1, "aescrypt", "-q", "-$mode", "-p", "$password", "$file");
+    if ($aes_result)
+    {
+        PerformAction(0, @error_message, "$output");
+        exit(-1);
+    }
+}
+
+# Indicate that encryption succeeded
+if ($mode eq "e")
+{
+    PerformAction(0, @info_message, "File encryption completed successfully");
+}
+else
+{
+    PerformAction(0, @info_message, "File decryption completed successfully");
+}

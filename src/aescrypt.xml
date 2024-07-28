@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="application/aescrypt">
+        <comment>AES Crypt document</comment>
+        <acronym>AES Crypt</acronym>
+        <generic-icon name="aescrypt_doc"/>
+        <glob pattern="*.aes"/>
+        <alias type="application/aes"/>
+        <magic priority="50">
+            <match type="string" offset="0" value="AES">
+                <match type="byte" offset="3" value="0">
+                    <match type="byte" offset="4" mask="240" value="0"/>
+                </match>
+                <match type="byte" offset="4" value="0"/>
+            </match>
+        </magic>
+    </mime-type>
+</mime-info>
