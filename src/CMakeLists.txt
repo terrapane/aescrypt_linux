@@ -1,4 +1,4 @@
-if(aescrypt_gui_INSTALL AND LINUX)
+if(aescrypt_linux_INSTALL AND LINUX)
     include(GNUInstallDirs)
     install(PROGRAMS aescrypt-gui DESTINATION ${CMAKE_INSTALL_BINDIR})
     install(FILES aescrypt.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications/)

@@ -10,7 +10,7 @@ set(COPYRIGHT_TEXT  "Copyright (C) 2024")
 set(AUTHOR_TEXT     "Terrapane Corporation")
 
 # Option to control ability to install the program
-option(aescrypt_gui_INSTALL "Install the AES Crypt Linux GUI Program" ON)
+option(aescrypt_linux_INSTALL "Install the AES Crypt Linux GUI Program" ON)
 
 add_subdirectory(dependencies)
 add_subdirectory(src)
