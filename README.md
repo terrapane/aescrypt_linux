@@ -89,7 +89,7 @@ Under Ubuntu (Debian), place this file in
 <?xml version="1.0"?>
 <!DOCTYPE Policy SYSTEM "https://www.debian.org/debsig/1.0/policy.dtd">
 <Policy xmlns="https://www.debian.org/debsig/1.0/">
-  <Origin Name="Terrapane" Description="Terrapane Corporation" id="E7BE982BCD50DDF4"/>
+  <Origin Name="Terrapane" Description="Terrapane Group, Inc." id="E7BE982BCD50DDF4"/>
   <Selection>
     <Required Type="origin" File="debsig.gpg" id="E7BE982BCD50DDF4"/>
   </Selection>
