@@ -3,7 +3,7 @@
     <mime-type type="application/aescrypt">
         <comment>AES Crypt document</comment>
         <acronym>AES Crypt</acronym>
-        <generic-icon name="aescrypt_doc"/>
+        <generic-icon name="aescrypt_paper"/>
         <glob pattern="*.aes"/>
         <alias type="application/aes"/>
         <magic priority="50">
