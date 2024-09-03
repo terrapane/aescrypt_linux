@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 # Define the AES Crypt GUI project
 project(aescrypt_linux
-        VERSION 4.0.2.0
+        VERSION 4.0.3.0
         DESCRIPTION "AES Crypt Graphical User Interface (GUI) for Linux"
         HOMEPAGE_URL "https://www.aescrypt.com")
 
