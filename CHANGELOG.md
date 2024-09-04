@@ -1,5 +1,9 @@
 # Change Log
 
+v4.0.4
+    - Updated AES Crypt CLI dependency
+    - Enable AES Crypt CLI tests during release builds
+
 v4.0.3
     - Changes to Linux packaging files; no code changes
 
