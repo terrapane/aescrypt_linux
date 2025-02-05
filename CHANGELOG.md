@@ -1,5 +1,9 @@
 # Change Log
 
+v4.2.0
+
+- Updated AES Crypt CLI dependency
+
 v4.1.0
 
 - Updated AES Crypt CLI dependency
