@@ -6,9 +6,6 @@ project(aescrypt_linux
         DESCRIPTION "AES Crypt Graphical User Interface (GUI) for Linux"
         HOMEPAGE_URL "https://www.aescrypt.com")
 
-set(COPYRIGHT_TEXT  "Copyright (C) 2024")
-set(AUTHOR_TEXT     "Terrapane Corporation")
-
 # Tests are built by default when this is a top-level project
 if(PROJECT_IS_TOP_LEVEL)
     option(aescrypt_gui_BUILD_TESTS "Build Tests for the AES Crypt GUI" ON)

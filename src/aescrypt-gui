@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 # aescrypt-gui
-# Copyright (C) 2024
+# Copyright (C) 2025
 # Terrapane Corporation
 #
 # This script launches the AES Crypt binary to encrypt files when directed
@@ -111,7 +111,7 @@ if ($#ARGV == -1)
     exit(-1);
 }
 
-# It is asssumed that all files will be encrypted or decrypted, with the
+# It is assumed that all files will be encrypted or decrypted, with the
 # choice based on the first file seen; assume encryption initially
 my $mode = "e";
 if ($ARGV[0] =~ /\.aes$/i)
