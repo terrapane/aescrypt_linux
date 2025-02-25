@@ -11,7 +11,7 @@ endif()
 # Fetch the AES Crypt CLI Project
 FetchContent_Declare(aescrypt_cli
     GIT_REPOSITORY ${TERRAPANE_SOURCE_URI}/aescrypt_cli.git
-    GIT_TAG        v4.2.0
+    GIT_TAG        v4.2.2
     GIT_SHALLOW    true)
 
 # Enable CLI tests if GUI tests are enabled
