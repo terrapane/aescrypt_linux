@@ -1,6 +1,6 @@
 # This file facilitates creation of package files for OS installation
 if(aescrypt_linux_INSTALL)
-    if(LINUX OR APPLE)
+    if(LINUX OR BSD OR APPLE)
         include(InstallRequiredSystemLibraries)
         set(CPACK_PACKAGE_NAME "aescrypt_gui")
         set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_DESCRIPTION}")
