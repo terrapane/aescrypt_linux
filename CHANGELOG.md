@@ -2,6 +2,7 @@
 
 v4.2.5 (in progress)
 
+- Modified the CMake configuration to ease building on FreeBSD
 - Updated package dependency information
 
 v4.2.4

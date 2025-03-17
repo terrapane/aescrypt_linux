@@ -1,14 +1,14 @@
-# AES Crypt Linux GUI Repository
+# AES Crypt Linux and FreeBSD GUI Repository
 
 This project contains the AES Crypt Graphical User Interface (GUI) package
-for Linux.  This repository exists primary for the purpose of building
-the package for installation on Linux by creating an .rpm and .deb package
+for Linux and FreeBSD.  This repository exists primary for the purpose of
+building the package for installation on Linux by creating an .rpm and .deb package
 file.
 
 ## Building the package
 
-To build a release build on Linux or Mac, change directories to the root of the
-source directory and issue these commands:
+To build a release build on Linux or FreeBSD, change directories to the root of
+the source directory and issue these commands:
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
@@ -25,7 +25,7 @@ This will create the `.rpm` and `.deb` files.  It will also create a `.tgz`
 file, which is built since it's convenient to do.  Some users may prefer
 this version to do a manual installation.
 
-## Signed release packages
+## Signed release packages (Linux only)
 
 Official releases will be signed with the following GnuPG key (file named
 `terrapane.asc`):
@@ -56,7 +56,7 @@ debsigs --sign=origin --default-key E7BE982BCD50DDF4 aescrypt_gui-4.0.0-Linux.de
 The filenames for the packages will differ based on the actual version of
 the file.
 
-## Verifying the signature
+## Verifying the signature (Linux only)
 
 This is entirely optional, but may be used to verify official packages.
 
@@ -123,7 +123,7 @@ command:
 debsig-verify aescrypt_gui-4.0.0-Linux.deb
 ```
 
-## Hashed package files
+## Hashed package files (all platforms)
 
 Package files will also be hashed and the hash values published on the
 [AES Crypt](https://www.aescrypt.com/) site.  The hash file will also be
