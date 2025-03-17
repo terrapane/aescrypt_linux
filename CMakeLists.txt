@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.21)
 
-# Define the AES Crypt GUI project
+# Define the AES Crypt GUI project for Linux and FreeBSD
 project(aescrypt_linux
         VERSION 4.2.4.1
-        DESCRIPTION "AES Crypt Graphical User Interface (GUI) for Linux"
+        DESCRIPTION "AES Crypt Graphical User Interface (GUI) for Linux or FreeBSD"
         HOMEPAGE_URL "https://www.aescrypt.com")
 
 # Tests are built by default when this is a top-level project
@@ -14,7 +14,7 @@ else()
 endif()
 
 # Option to control ability to install the program
-option(aescrypt_linux_INSTALL "Install the AES Crypt Linux GUI Program" ON)
+option(aescrypt_linux_INSTALL "Install the AES Crypt GUI Program" ON)
 
 include(CTest)
 

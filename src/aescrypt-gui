@@ -5,7 +5,7 @@
 # Terrapane Corporation
 #
 # This script launches the AES Crypt binary to encrypt files when directed
-# by the user from the Linux desktop.
+# by the user from the Linux or FreeBSD desktop.
 #
 # usage: aescrypt-gui [FILES]...
 #
