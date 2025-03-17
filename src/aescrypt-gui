@@ -66,7 +66,7 @@ sub PerformAction(@)
 # Try to determine the type of desktop
 my $desktop = $ENV{"XDG_CURRENT_DESKTOP"};
 
-# If desktop is KDE, prefer kdialog; else prefer zenity
+# If desktop is KDE, use kdialog; else use zenity
 my $dialog = ($desktop eq "KDE") ? "kdialog" : "zenity";
 my $alternate_dialog = ($desktop eq "KDE") ? "zenity" : "kdialog";
 
