@@ -1,6 +1,6 @@
 # Change Log
 
-v4.2.5 (in progress)
+v4.2.5
 
 - Modified the CMake configuration to ease building on FreeBSD
 - Updated package dependency information
