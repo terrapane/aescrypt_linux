@@ -1,5 +1,9 @@
 # Change Log
 
+v4.2.6
+
+- Updated AES Crypt CLI dependency
+
 v4.2.5
 
 - Modified the CMake configuration to ease building on FreeBSD
