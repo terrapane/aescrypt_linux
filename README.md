@@ -83,7 +83,7 @@ Where the filename after `-K` will be the name of the RPM file.
 This only needs to be done once.
 
 Under Ubuntu (Debian), place this file in
-/etc/debsig/policies/E7BE982BCD50DDF4/debsig.pol.
+/etc/debsig/policies/E7BE982BCD50DDF4/terrapane.pol.
 
 ```xml
 <?xml version="1.0"?>
@@ -91,10 +91,10 @@ Under Ubuntu (Debian), place this file in
 <Policy xmlns="https://www.debian.org/debsig/1.0/">
   <Origin Name="Terrapane" Description="Terrapane Group, Inc." id="E7BE982BCD50DDF4"/>
   <Selection>
-    <Required Type="origin" File="debsig.gpg" id="E7BE982BCD50DDF4"/>
+    <Required Type="origin" File="terrapane.gpg"/>
   </Selection>
   <Verification MinOptional="0">
-    <Required Type="origin" File="debsig.gpg" id="E7BE982BCD50DDF4"/>
+    <Required Type="origin" File="terrapane.gpg"/>
   </Verification>
 </Policy>
 ```
@@ -103,16 +103,25 @@ As an aside, on Ubuntu the above policy syntax is described in the file
 /usr/share/doc/debsig-verify/policy-syntax.txt.
 
 One must also place a binary version of the Terrapane public key in the file
-/usr/share/debsig/keyrings/E7BE982BCD50DDF4/debsig.gpg.  To do that, issue
+/usr/share/debsig/keyrings/E7BE982BCD50DDF4/terrapane.gpg.  To do that, issue
 these commands as root:
 
 ```bash
 mkdir -p /usr/share/debsig/keyrings/E7BE982BCD50DDF4
-gpg --dearmor <terrapane.asc >/usr/share/debsig/keyrings/E7BE982BCD50DDF4/debsig.gpg
+gpg --dearmor <terrapane.asc >/usr/share/debsig/keyrings/E7BE982BCD50DDF4/terrapane.gpg
 ```
 
 The imported public key (`terrapane.asc`) is the one mentioned in the previous
 section.
+
+If you prefer to fetch the key directly from Terrapane's web site, you can do
+the the following instead of copying the above `terrapane.asc` file and
+running `gpg --dearmor`:
+
+```bash
+mkdir -p /usr/share/debsig/keyrings/E7BE982BCD50DDF4
+curl https://www.terrapane.com/terrapane.gpg >/usr/share/debsig/keyrings/E7BE982BCD50DDF4/terrapane.gpg
+```
 
 #### Verifying Debian files
 
