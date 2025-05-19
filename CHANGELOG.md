@@ -3,6 +3,7 @@
 v4.3.0
 
 - Updated AES Crypt CLI dependency
+- Renamed top-level project, as it is not just for Linux
 
 v4.2.6
 
